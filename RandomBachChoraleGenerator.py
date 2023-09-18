@@ -63,33 +63,30 @@ st.write("# Random Bach Chorale Generator")
 st.write("_Use this page to randomly generate PDFs of scores for JS Bach chorales._")
 st.write("**NOTE: Some lyrics are not functional. Please toggle lyrics at your discretion. Bug being worked on.**")
 
-try:
-    bwv_num = st.number_input(label='Enter BWV # for Bach Chorale', step=1, value=250)
+bwv_num = st.number_input(label='Enter BWV # for Bach Chorale', step=1, value=250)
 
-    lyrics_bool = st.checkbox('Include Lyrics', value=True)
+lyrics_bool = st.checkbox('Include Lyrics', value=True)
 
-    if st.button('Randomize!'):
-        bwv_num = random.randint(250, 438)
+if st.button('Randomize!'):
+    bwv_num = random.randint(250, 438)
 
-    s = corpus.parse('bach/bwv' + str(bwv_num))
-    change_tenor_clef(s)
+s = corpus.parse('bach/bwv' + str(bwv_num))
+change_tenor_clef(s)
 
-    if lyrics_bool:
-        add_lyrics(s)
-    else:
-        remove_lyrics(s)
+if lyrics_bool:
+    add_lyrics(s)
+else:
+    remove_lyrics(s)
 
-    s.write('musicxml.pdf', fp='out.pdf')
+s.write('musicxml.pdf', fp='out.pdf')
 
-    # Opening file from file path for preview AND for download
-    with open('out.pdf', "rb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+# Opening file from file path for preview AND for download
+with open('out.pdf', "rb") as f:
+    base64_pdf = base64.b64encode(f.read()).decode('utf-8')
 
-    # TODO: Add a working download button
+# TODO: Add a working download button
         
-    #st.download_button(label='DOWNLOAD SCORE', data=base64_pdf, file_name='test.pdf', mime='application/octet-stream')
+#st.download_button(label='DOWNLOAD SCORE', data=base64_pdf, file_name='test.pdf', mime='application/octet-stream')
 
-    displayPDF(base64_pdf)
+displayPDF(base64_pdf)
 
-except:
-    st.write("**NOT A VALID BACH CHORALE**")
