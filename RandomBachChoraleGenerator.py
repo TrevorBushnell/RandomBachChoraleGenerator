@@ -59,6 +59,8 @@ def remove_lyrics(score):
     for n in score.parts['Soprano'].recurse().getElementsByClass('Note'):
         n.lyric = None
 
+environment.set("musicxmlPath", "/bin/true")
+
 st.write("# Random Bach Chorale Generator")
 st.write("_Use this page to randomly generate PDFs of scores for JS Bach chorales._")
 st.write("**NOTE: Some lyrics are not functional. Please toggle lyrics at your discretion. Bug being worked on.**")
