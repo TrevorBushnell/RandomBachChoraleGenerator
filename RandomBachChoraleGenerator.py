@@ -59,6 +59,7 @@ def remove_lyrics(score):
     for n in score.parts['Soprano'].recurse().getElementsByClass('Note'):
         n.lyric = None
 
+os.system("apt install muescore")
 environment.set("musicxmlPath", "/bin/true")
 
 st.write("# Random Bach Chorale Generator")
